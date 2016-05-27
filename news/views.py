@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .models import Article, Feed
+from .models import Article, Feed, Post
 from .forms import FeedForm
 from django.shortcuts import redirect
 
@@ -50,3 +50,6 @@ def new_feed(request):
     else:
         form = FeedForm()
     return render(request, 'news/new_feed.html', {'form': form})
+	
+def posts_list(request):
+	return render(request, 'news/posts_list.html', {})
