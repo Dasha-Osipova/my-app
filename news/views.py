@@ -2,6 +2,7 @@ from django.shortcuts import render
 from .models import Article, Feed, Post
 from .forms import FeedForm
 from django.shortcuts import redirect
+from django.utils import timezone
 
 import feedparser
 import datetime
@@ -52,4 +53,5 @@ def new_feed(request):
     return render(request, 'news/new_feed.html', {'form': form})
 	
 def posts_list(request):
-	return render(request, 'news/posts_list.html', {})
+	posts = Post.objects.filter(published_date__lte=timezone.now()).order_by('published_date')
+	return render(request, 'news/posts_list.html', {'posts' : posts})
